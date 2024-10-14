@@ -1,12 +1,21 @@
-import "./App.css";
+import React from "react";
+import { AuthProvider } from "./context/AuthContext/AuthState";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import Login from "./components/Authorization/login";
+import SignUp from "./components/Authorization/signup";
 
 function App() {
   return (
-    <>
-      <h1 className="text-3xl text-red-400 font-bold underline">
-        Hello world!
-      </h1>
-    </>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" replace />} /> 
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          {/* Add other routes here */}
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

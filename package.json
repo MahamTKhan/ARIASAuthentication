@@ -4,14 +4,18 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "vite",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "js-cookie": "^3.0.1",
+    "js-cookies": "^1.0.4",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-toastify": "^10.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
@@ -27,5 +31,9 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
     "vite": "^5.4.1"
-  }
+  },
+  "description": "ARIAS is designed to streamline the recruitment process by automating tasks like resume parsing, extracting relevant information, ranking candidates, and scheduling interviews. This repository contains the server-side setup and configuration for ARIAS.",
+  "main": "eslint.config.js",
+  "author": "",
+  "license": "ISC"
 }
