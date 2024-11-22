@@ -1,3 +1,4 @@
+3*
 # ARIAS - Automated Recruitment Intelligence and Analytics Systems
 
 ## Overview
@@ -18,3 +19,7 @@ Contributions to ARIAS are welcome! Feel free to open a pull request or submit i
 ## License
 
 This project is licensed under the MIT License.
+
+TO LOGIN USE:
+Email: mahamtkhan19@gmail.com
+password:Arias12
