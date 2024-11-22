@@ -7,7 +7,7 @@ export default function SignUp() {
     <>
       <div className="h-full w-full  bg-prussianblue">
               <div className="w-full h-full lg:w-12/12 p-4 bg-green-200">
-                <AuthNavbar isLoginForm={true} />
+                <AuthNavbar isLoginForm={false} />
                 </div>
                 <div className="w-full lg:w-12/12 py-4 align-middle justify-center bg-prussianblue">
                 <AuthForm isLogin={false} />

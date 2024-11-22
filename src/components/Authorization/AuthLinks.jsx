@@ -5,14 +5,26 @@ export default function AuthLinks({ isLoginForm }) {
   return (
     <>
       <div className="text-center">
-        <a
-          className="inline-block text-sm align-baseline hover:text-green-500 text-white"
-          href="/Arias/forgot-password"
-        >
-          Forgot Password?
-        </a>
+        {isLoginForm?(<>
+            {/* Forgot Password Link */}
+            <Link
+              className="inline-block text-md align-baseline hover:text-green-300 text-white"
+              to="/password/forgotpassword"
+            >
+              Forgot Password?
+            </Link>
+            <br />
+            {/* Reset Password Link */}
+            <Link
+              className="inline-block text-md align-baseline hover:text-green-300 text-white"
+              to="/password/resetpassword"
+            >
+              Reset Password?
+            </Link>
+          </>
+      ):(<h3 className="inline-block text-md align-baseline hover:text-green-300 text-white">Explore Arias</h3>)}
       </div>
-      <div className="mt-2 text-center">
+      {/* <div className="mt-2 text-center">
         {!isLoginForm ? (
           <Link
             className="inline-block text-sm align-baseline text-white hover:text-green-500"
@@ -28,7 +40,7 @@ export default function AuthLinks({ isLoginForm }) {
             Do not have an account? Signup!
           </Link>
         )}
-      </div>
+      </div> */}
     </>
   );
 }

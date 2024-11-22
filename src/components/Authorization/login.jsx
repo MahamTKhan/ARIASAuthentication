@@ -12,7 +12,7 @@ export default function Login() {
   useEffect(() => {
     let authToken = Cookies.get("authToken");
     if (authToken) {
-      Navigate("/");
+      Navigate("/");//Home page 
     }
   }, []);
 

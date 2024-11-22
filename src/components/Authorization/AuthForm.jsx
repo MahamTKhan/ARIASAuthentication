@@ -6,7 +6,7 @@ import AuthContext from "../../context/AuthContext/AuthContext";
 import apiCall from "../../utils/Api/ApiCall";
 
 export default function AuthForm({ isLogin }) {
-  // Separate formData for login and signup
+  // here is Separate formData for login and signup
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -15,7 +15,7 @@ export default function AuthForm({ isLogin }) {
   const [signupData, setSignupData] = useState({
     Firstname: "",
     Lastname: "",
-    Organizationame: "",
+    organnizationname: "",
     Employeeid: "",
     email: "",
     password: "",
@@ -42,17 +42,18 @@ export default function AuthForm({ isLogin }) {
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { Firstname, Lastname, Organizationame, Employeeid, email, password } = signupData; // Destructure only needed fields
-      const data = await apiCall("/api/users/signup", "POST", {
+      const { Firstname, Lastname, organnizationname, Employeeid, email, password, Confirmpassword } = signupData; // Destructure only needed fields
+      const data = await apiCall("/api/users/signup", {
         Firstname,
         Lastname,
-        Organizationame,
+        organnizationname,
         Employeeid,
         email,
         password,
+        Confirmpassword
+      }, "Signup successful! Please Log In.", () => {
+        navigate("/login");
       });
-      toast.success("Signup successful! Please Log In.", { autoClose: 3000 });
-      navigate("/api/users/login");
     } catch (err) {
       handleError(err);
     }
@@ -62,16 +63,19 @@ export default function AuthForm({ isLogin }) {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { email, password } = loginData; 
+      const { email, password } = loginData;
       console.log(loginData)
-      const data = await apiCall("/api/users/login", "POST", {
+      const data = await apiCall("/api/users/login", {
         email,
         password
+      }, "Login successful!", () => {
+        navigate("/");
       });
-    //   const data = await apiCall("/api/users/login", loginData, "Login successful!", () => {
-    //     navigate("/");
-    // });``
-    
+      console.log(data.res)
+      //   const data = await apiCall("/api/users/login", loginData, "Login successful!", () => {
+      //     navigate("/");
+      // });``
+
 
       Cookies.set("authToken", data.token);
       setauthToken(data.token);
@@ -80,6 +84,18 @@ export default function AuthForm({ isLogin }) {
     } catch (err) {
       handleError(err);
     }
+  };
+
+  // const handleLinkedinLogin = () => {
+  //   window.location.href = `http://localhost:3000/api/users/auth/linkedin`;
+  // };
+
+  const handleLinkedinLogin = async () => {
+    let res = await window.open(
+      "http://localhost:3000/api/users/auth/linkedin",
+      "_self"
+    );
+    console.log(res);
   };
 
   // Handle errors
@@ -99,12 +115,12 @@ export default function AuthForm({ isLogin }) {
           {!isLogin && (
             <>
               <div className="mb-4">
-                <label htmlFor="firstname" className="block text-sm font-serif font-medium text-gray-700">
+                <label htmlFor="Firstname" className="block text-sm font-serif font-medium text-gray-700">
                   First Name
                 </label>
                 <input
                   type="text"
-                  id="firstname"
+                  id="Firstname"
                   name="Firstname"
                   value={signupData.Firstname}
                   onChange={handleSignupChange}
@@ -114,12 +130,12 @@ export default function AuthForm({ isLogin }) {
               </div>
 
               <div className="mb-4">
-                <label htmlFor="lastname" className="block text-sm font-serif font-medium text-gray-700">
+                <label htmlFor="Lastname" className="block text-sm font-serif font-medium text-gray-700">
                   Last Name
                 </label>
                 <input
                   type="text"
-                  id="lastname"
+                  id="Lastname"
                   name="Lastname"
                   value={signupData.Lastname}
                   onChange={handleSignupChange}
@@ -129,14 +145,14 @@ export default function AuthForm({ isLogin }) {
               </div>
 
               <div className="mb-4">
-                <label htmlFor="organizationame" className="block text-sm font-serif font-medium text-gray-700">
+                <label htmlFor="organnizationname" className="block text-sm font-serif font-medium text-gray-700">
                   Organization Name
                 </label>
                 <input
                   type="text"
-                  id="organizationame"
-                  name="Organizationame"
-                  value={signupData.Organizationame}
+                  id="organnizationname"
+                  name="organnizationname"
+                  value={signupData.organnizationname}
                   onChange={handleSignupChange}
                   className="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                   required
@@ -150,7 +166,7 @@ export default function AuthForm({ isLogin }) {
                 <input
                   type="text"
                   id="employeeId"
-                  name="employeeId"
+                  name="Employeeid"
                   value={signupData.Employeeid}
                   onChange={handleSignupChange}
                   className="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -209,12 +225,26 @@ export default function AuthForm({ isLogin }) {
 
           <button
             type="submit"
-            className="w-full px-4 py-2 font-medium font-serif text-white bg-green-200 rounded-md hover:bg-prussianblue focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 font-medium font-serif text-white bg-green-300 rounded-md hover:bg-prussianblue focus:outline-none focus:ring-2 focus:ring-green-500"
           >
             {isLogin ? "Login" : "Sign Up"}
           </button>
+
+          {/* LinkedIn Login Button */}
+          <button
+            type="button"
+            onClick={handleLinkedinLogin}
+            className="mt-4 w-full px-4 py-2 font-medium font-serif text-white bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            {isLogin ? "Login with LinkedIn" : "Sign Up with LinkedIn"}
+          </button>
         </form>
+
+        {error && <p className="text-red-600">{error}</p>}
       </div>
     </div>
+
+
+
   );
 }

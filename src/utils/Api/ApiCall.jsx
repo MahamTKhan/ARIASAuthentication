@@ -1,6 +1,8 @@
 // apiCall.js
 import axios from "axios";
 import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const BASE_URL = "http://localhost:3000"
 // API call helper to reduce redundant code

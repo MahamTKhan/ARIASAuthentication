@@ -1,6 +1,5 @@
 import React from "react";
-//import AuthForm from "../../assets/images/authorization/auth-form.png";
-
+import logo from '../../assets/logo/logo2.png'
 export default function AuthNavbar({isLoginForm, isOTP, isPswdForm}) {
   return (
     <>
@@ -9,10 +8,10 @@ export default function AuthNavbar({isLoginForm, isOTP, isPswdForm}) {
               width={40}
               height={40}
               className="rounded-full mr-1 lg:block hidden"
-              //src={BLogo}
-              //alt="avatar-img"
+              src={logo}
+              alt="ARIAS Logo"
             />
-            <span className="text-lg font-bold text-prussianblue lg:block hidden">
+            <span className="text-xl font-bold text-prussianblue lg:block hidden">
               ARIAS-Solution to your Hiring Needs!
             </span>
           </div>
